@@ -1,0 +1,3 @@
+rootProject.name = 'chorServer'
+
+include 'ChorCore'
