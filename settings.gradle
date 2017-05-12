@@ -1,3 +1,5 @@
-rootProject.name = 'chorServer'
+rootProject.name = 'chor'
 
 include 'ChorCore'
+include 'chorServer'
+

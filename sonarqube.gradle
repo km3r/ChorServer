@@ -2,22 +2,22 @@ sonarqube {
     //noinspection GroovyAssignabilityCheck
     properties {
         property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.sources", "src/main/java, ChorCore/src/main/java" // first defines where the java files are, the second where the xml files are
-        property "sonar.binaries", "build/classes/main, ChorCore/build/classes/main"
-        property "sonar.java.binaries", "build/classes/main, ChorCore/build/classes/main"
+        property "sonar.sources", "chorServer/src/main/java, ChorCore/src/main/java" // first defines where the java files are, the second where the xml files are
+        property "sonar.binaries", "chorServer/build/classes/main, ChorCore/build/classes/main"
+        property "sonar.java.binaries", "chorServer/build/classes/main, ChorCore/build/classes/main"
 
-        property "sonar.tests", "src/test/java, ChorCore/src/test/java" // where the tests are located
-        property "sonar.java.test.binaries", "build/classes/test, ChorCore/build/classes/test"
+        property "sonar.tests", "chorServer/src/test/java, ChorCore/src/test/java" // where the tests are located
+        property "sonar.java.test.binaries", "chorServer/build/classes/test, ChorCore/build/classes/test"
 
         property "sonar.scm.provider", "git"
 
-        property "sonar.jacoco.reportPaths", "build/jacoco/test.exec, ChorCore/build/jacoco/test.exec" // path to coverage reports
+        property "sonar.jacoco.reportPaths", "chorServer/build/jacoco/test.exec, ChorCore/build/jacoco/test.exec" // path to coverage reports
         property "sonar.java.coveragePlugin", "jacoco"
-        property "sonar.junit.reportsPaths", "build/test-results/test, ChorCore/build/test-results/test" // path to junit reports
+        property "sonar.junit.reportsPaths", "chorServer/build/test-results/test, ChorCore/build/test-results/test" // path to junit reports
 
         property "sonar.projectKey", "km3r-ChorServer-key"
         property "sonar.projectName", "km3r-ChorServer"
-        property "sonar.projectVersion", "0.0.1"
+        property "sonar.projectVersion", "0.0.2"
         property "sonar.organization", "305"
 
     }

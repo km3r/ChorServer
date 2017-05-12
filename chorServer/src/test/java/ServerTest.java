@@ -1,11 +1,8 @@
-import message.LoginMessage;
-import message.LoginReply;
 import model.DatabaseHolder;
 import org.junit.Test;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.util.Scanner;

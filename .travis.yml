@@ -10,8 +10,16 @@ script:
 before_cache:
  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+ - rm -f  $HOME/ChorCore/.gradle/caches/modules-2/modules-2.lock
+ - rm -fr $HOME/ChorCore/.gradle/caches/*/plugin-resolution/
+ - rm -f  $HOME/chorServer/.gradle/caches/modules-2/modules-2.lock
+ - rm -fr $HOME/chorServer/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+    - $HOME/ChorCore/.gradle/caches/
+    - $HOME/ChorCore/.gradle/wrapper/
+    - $HOME/chorServer/.gradle/caches/
+    - $HOME/chorServer/.gradle/wrapper/
     - $HOME/.sonar

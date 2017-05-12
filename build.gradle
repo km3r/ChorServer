@@ -1,36 +1,30 @@
 plugins {
     id "org.sonarqube" version "2.2"
+    id "jacoco"
 }
 
-group 'com.kylemrosenthal'
-version '1.0-SNAPSHOT'
+
+allprojects {
+
+    group 'com.kylemrosenthal'
+    version '1.0-SNAPSHOT'
+
+
+    repositories {
+        mavenCentral()
+    }
+}
 
 apply plugin: 'java'
-apply plugin: "jacoco"
-
 apply from: './sonarqube.gradle'
 
 sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-}
-
-task copyJar {
-        copy {
-            from 'ChorCore/build/libs/ChorCore-0.0.1-SNAPSHOT.jar'
-            into "src/main/resources/"
-        }
-
-}
-
-
 dependencies {
-    compile project(':ChorCore')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-project.tasks["jacocoTestReport"].dependsOn "test"
+project.tasks["jacocoTestReport"].dependsOn "ChorCore:test, chorServer:test"
 
 jacoco {
     toolVersion = "0.7.7.201606060606"
@@ -43,27 +37,12 @@ jacocoTestReport {
     }
 }
 
-
 evaluationDependsOnChildren()
 
-project (':ChorCore') {
-
-    build.finalizedBy(copyJar)
-    task gitPull(type: Exec){
-        outputs.upToDateWhen {false}
-        commandLine "git", "pull"
+task copyJar {
+    copy {
+        from 'ChorCore/build/libs/ChorCore-0.0.1-SNAPSHOT.jar'
+        into "chorServer/src/main/resources/"
     }
-}
-
-
-
-task updateCore {
-    outputs.upToDateWhen {false}
-    setOnlyIf {true}
-    project (':ChorCore') {
-        gitPull
-        build
-    }
-    copyJar
 
 }

@@ -1,6 +1,4 @@
 import com.sun.net.httpserver.HttpExchange;
-import message.LoginMessage;
-import message.LoginReply;
 import model.DatabaseHolder;
 import model.User;
 
