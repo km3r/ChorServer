@@ -8,8 +8,9 @@ import java.io.IOException;
  * <p>
  * Created by Kyle on 5/11/2017.
  */
-public class TaskManager extends Manager {
-    public TaskManager(DatabaseHolder core) {
+public class UserManager extends Manager {
+
+    public UserManager(DatabaseHolder core) {
         super(core);
     }
 

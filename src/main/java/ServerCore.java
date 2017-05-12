@@ -1,8 +1,15 @@
+import com.sun.net.httpserver.HttpServer;
 import controller.Core;
+import model.DatabaseHolder;
+import model.User;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.InetSocketAddress;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.Executors;
+
 
 /**
  * chorServer
@@ -11,24 +18,38 @@ import java.net.Socket;
  */
 public class ServerCore {
     Core core;
-    ServerSocket serverSocket;
-
+    HttpServer server;
+    InetSocketAddress address;
 
     public ServerCore() {
+        core = new Core();
+        MessageDigest md;
+        //TEMP
+        DatabaseHolder holder;
         try {
-            serverSocket = new ServerSocket(17546);
-        } catch (IOException e) {
+            md = MessageDigest.getInstance("SHA");
+            holder = new DatabaseHolder();
+            String password = "hi";
+            byte arr[] = password.getBytes();
+            arr = password.getBytes();
+            User temp = new User("Bob", arr);
+            holder.addUser(temp);
+
+
+            //TEMP END
+            address = new InetSocketAddress(17546);
+
+            server = HttpServer.create(address, 0);
+            server.createContext("/login", new LoginManager(holder));
+            server.createContext("/settings", new UserManager(holder));
+            server.createContext("/group", new GroupManager(holder));
+            server.createContext("/task", new TaskManager(holder));
+            server.setExecutor(Executors.newSingleThreadExecutor());
+            server.start();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Socket socket;
-        while (true) {
-            try {
-                socket = serverSocket.accept();
-                MiniServer mini = new MiniServer(socket);
-                mini.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 }
