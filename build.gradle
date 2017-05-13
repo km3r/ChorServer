@@ -42,7 +42,7 @@ evaluationDependsOnChildren()
 task copyJar {
     copy {
         from 'ChorCore/build/libs/ChorCore-0.0.1-SNAPSHOT.jar'
-        into "chorServer/src/main/resources/"
+        into 'chorServer/src/main/resources/'
     }
 
 }
