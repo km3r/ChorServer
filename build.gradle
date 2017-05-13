@@ -24,7 +24,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-project.tasks["jacocoTestReport"].dependsOn "ChorCore:test, chorServer:test"
+project.tasks["jacocoTestReport"].dependsOn ":ChorCore:test"
+project.tasks["jacocoTestReport"].dependsOn ":chorServer:test"
 
 jacoco {
     toolVersion = "0.7.7.201606060606"
