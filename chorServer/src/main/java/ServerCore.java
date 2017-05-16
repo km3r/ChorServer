@@ -14,13 +14,18 @@ import java.util.concurrent.Executors;
  * Created by Kyle on 5/11/2017.
  */
 public class ServerCore {
-    //TODO make singleton
-
+    private static class Loader {
+        private static final ServerCore serverCore = new ServerCore();
+    }
     Core core;
     HttpServer server;
     InetSocketAddress address;
 
-    public ServerCore() {
+    public static ServerCore getServerCore() {
+        return Loader.serverCore;
+    }
+
+    private ServerCore() {
         core = new Core();
         MessageDigest md;
         //TEMP
