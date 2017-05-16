@@ -16,6 +16,8 @@ import java.util.Scanner;
 public class LoginManager extends Manager {
     MessageDigest md;
 
+    String id;
+
     public LoginManager(DatabaseHolder core) {
         super(core);
         try {
@@ -26,12 +28,8 @@ public class LoginManager extends Manager {
     }
 
     @Override
-    public void handle(HttpExchange httpExchange) throws IOException {
-
-
-        String id = "FAIL";
-
-        Scanner in = new Scanner(httpExchange.getRequestBody());
+    protected void readPacket(Scanner in) {
+        id = "FAIL";
 
         String name = in.nextLine();
         String pass = in.nextLine();
@@ -47,19 +45,12 @@ public class LoginManager extends Manager {
                 break;
             }
         }
-
-
-
-
-        //System.out.println(response);
-
-        httpExchange.sendResponseHeaders(200, 0);
-        PrintStream os = new PrintStream(httpExchange.getResponseBody());
-
-
-
-        os.println(id);
-        os.flush();
-        os.close();
     }
+
+    @Override
+    protected void replyPacket(PrintStream out) {
+        out.println(id);
+    }
+
+
 }

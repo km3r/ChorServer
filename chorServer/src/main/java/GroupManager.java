@@ -2,6 +2,8 @@ import com.sun.net.httpserver.HttpExchange;
 import model.DatabaseHolder;
 
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 /**
  * chorServer
@@ -14,7 +16,14 @@ public class GroupManager extends Manager {
     }
 
     @Override
-    public void handle(HttpExchange httpExchange) throws IOException {
+    protected void readPacket(Scanner in) {
 
     }
+
+    @Override
+    protected void replyPacket(PrintStream out) {
+
+    }
+
+
 }

@@ -14,6 +14,8 @@ import java.util.concurrent.Executors;
  * Created by Kyle on 5/11/2017.
  */
 public class ServerCore {
+    //TODO make singleton
+
     Core core;
     HttpServer server;
     InetSocketAddress address;
@@ -38,7 +40,7 @@ public class ServerCore {
 
             server = HttpServer.create(address, 0);
             server.createContext("/login", new LoginManager(holder));
-            server.createContext("/settings", new UserManager(holder));
+            server.createContext("/user", new UserManager(holder));
             server.createContext("/group", new GroupManager(holder));
             server.createContext("/task", new TaskManager(holder));
             server.setExecutor(Executors.newSingleThreadExecutor());

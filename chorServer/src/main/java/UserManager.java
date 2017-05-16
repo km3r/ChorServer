@@ -1,7 +1,10 @@
 import com.sun.net.httpserver.HttpExchange;
 import model.DatabaseHolder;
+import model.User;
 
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 /**
  * chorServer
@@ -10,12 +13,27 @@ import java.io.IOException;
  */
 public class UserManager extends Manager {
 
+    User lastUser;
+
     public UserManager(DatabaseHolder core) {
         super(core);
     }
 
     @Override
-    public void handle(HttpExchange httpExchange) throws IOException {
-
+    protected void readPacket(Scanner in) {
+        String command = in.nextLine();
+        String name = in.nextLine();
+        String pass = in.nextLine();
+        switch (command) {
+            case "CREATE":
+                lastUser = new User(name,pass.getBytes());
+                core.addUser(lastUser);
+        }
     }
+
+    @Override
+    protected void replyPacket(PrintStream out) {
+        out.println(lastUser.getUserID());
+    }
+
 }
